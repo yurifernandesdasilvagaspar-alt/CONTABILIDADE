@@ -1,0 +1,1112 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Amigos da Contabilidade — Contabilidade Online para MEI e Autônomos</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green:      #1A56DB;
+    --green-mid:  #1E40AF;
+    --green-light:#60A5FA;
+    --mint:       #EFF6FF;
+    --cream:      #F0F4FF;
+    --dark:       #0A0A14;
+    --dark2:      #0F172A;
+    --text:       #0F172A;
+    --muted:      #64748B;
+    --white:      #FFFFFF;
+    --border:     rgba(26,86,219,0.15);
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+
+  body {
+    background: var(--cream);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* ── NAVBAR ── */
+  nav {
+    position: fixed; top:0; width:100%; z-index:999;
+    display:flex; align-items:center; justify-content:space-between;
+    padding: 18px 64px;
+    background: rgba(250,250,247,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem; color: var(--green);
+    letter-spacing: -0.5px;
+  }
+
+  .logo span { color: var(--text); }
+
+  nav ul { display:flex; gap:36px; list-style:none; }
+
+  nav ul a {
+    text-decoration:none; color: var(--muted);
+    font-size:0.88rem; font-weight:500;
+    transition: color 0.25s;
+  }
+
+  nav ul a:hover { color: var(--green); }
+
+  .nav-cta {
+    background: var(--green); color: var(--white);
+    border:none; cursor:pointer;
+    padding: 11px 28px;
+    font-family: 'DM Sans', sans-serif;
+    font-weight:600; font-size:0.88rem;
+    border-radius: 2px;
+    transition: background 0.3s, transform 0.2s;
+    text-decoration:none; display:inline-block;
+  }
+
+  .nav-cta:hover { background: var(--green-mid); transform:translateY(-1px); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display:flex; align-items:center;
+    padding: 130px 64px 80px;
+    position:relative; overflow:hidden;
+    background:
+      radial-gradient(ellipse 70% 60% at 100% 50%, rgba(10,124,78,0.07) 0%, transparent 65%),
+      var(--cream);
+  }
+
+  .hero-dots {
+    position:absolute; right:0; top:0; bottom:0; width:50%;
+    background-image: radial-gradient(circle, rgba(10,124,78,0.12) 1.5px, transparent 1.5px);
+    background-size: 32px 32px;
+    mask-image: linear-gradient(to left, rgba(0,0,0,0.5), transparent);
+  }
+
+  .hero-left { max-width:580px; position:relative; z-index:2; }
+
+  .hero-tag {
+    display:inline-flex; align-items:center; gap:8px;
+    background: var(--mint);
+    border: 1px solid rgba(10,124,78,0.25);
+    color: var(--green);
+    font-size:0.75rem; font-weight:600; letter-spacing:1.5px; text-transform:uppercase;
+    padding: 7px 16px; border-radius:100px;
+    margin-bottom:28px;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .hero-tag::before { content:'●'; font-size:0.5rem; }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 5.5vw, 4.6rem);
+    line-height: 1.08; font-weight:800;
+    letter-spacing:-1px;
+    animation: fadeUp 0.6s 0.1s ease both;
+  }
+
+  .hero h1 em {
+    font-style:normal;
+    color: var(--green);
+    position:relative;
+  }
+
+  .hero h1 em::after {
+    content:'';
+    position:absolute; left:0; bottom:-4px; right:0; height:3px;
+    background: var(--green-light); border-radius:2px;
+  }
+
+  .hero-sub {
+    color: var(--muted); font-size:1.05rem; line-height:1.75;
+    margin: 24px 0 38px; max-width:480px;
+    animation: fadeUp 0.6s 0.2s ease both;
+  }
+
+  .hero-btns {
+    display:flex; gap:14px; flex-wrap:wrap;
+    animation: fadeUp 0.6s 0.3s ease both;
+  }
+
+  .btn-green {
+    background: var(--green); color: var(--white);
+    padding:14px 36px; font-weight:600; font-size:0.92rem;
+    border:none; cursor:pointer; border-radius:2px;
+    transition: all 0.3s; text-decoration:none; display:inline-block;
+  }
+
+  .btn-green:hover {
+    background: var(--green-mid);
+    transform:translateY(-2px);
+    box-shadow: 0 12px 36px rgba(10,124,78,0.25);
+  }
+
+  .btn-ghost {
+    background:transparent; color: var(--green);
+    padding:14px 36px; font-weight:600; font-size:0.92rem;
+    border: 1.5px solid var(--green); cursor:pointer; border-radius:2px;
+    transition: all 0.3s; text-decoration:none; display:inline-block;
+  }
+
+  .btn-ghost:hover { background: var(--mint); }
+
+  .hero-right {
+    position:absolute; right:64px; top:50%; transform:translateY(-50%);
+    z-index:2;
+    animation: fadeLeft 0.8s 0.4s ease both;
+  }
+
+  .hero-card-main {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius:4px;
+    padding: 32px 28px; width:280px;
+    box-shadow: 0 20px 60px rgba(10,124,78,0.1);
+  }
+
+  .hc-label { font-size:0.7rem; letter-spacing:2px; text-transform:uppercase; color: var(--muted); margin-bottom:6px; }
+
+  .hc-value {
+    font-family:'Playfair Display',serif;
+    font-size:2.2rem; color: var(--green); font-weight:800; line-height:1;
+  }
+
+  .hc-desc { color: var(--muted); font-size:0.78rem; margin-top:6px; }
+
+  .hc-divider { border:none; border-top:1px solid var(--border); margin:18px 0; }
+
+  .hc-row { display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; }
+  .hc-row span { font-size:0.82rem; color: var(--muted); }
+  .hc-row strong { font-size:0.88rem; color: var(--green); }
+
+  .hc-badge {
+    margin-top:16px;
+    background: var(--mint); color: var(--green);
+    font-size:0.75rem; font-weight:600;
+    padding:8px 12px; text-align:center; border-radius:2px;
+  }
+
+  /* ── STATS ── */
+  .stats {
+    background: var(--dark);
+    padding: 50px 64px;
+    display:grid; grid-template-columns:repeat(4,1fr);
+    gap:1px;
+  }
+
+  .stat-item {
+    padding: 36px 32px;
+    background: var(--dark2);
+    text-align:center;
+    transition: background 0.3s;
+  }
+
+  .stat-item:hover { background: rgba(14,155,97,0.12); }
+
+  .stat-num {
+    font-family:'Playfair Display',serif;
+    font-size:2.8rem; color: var(--green-light);
+    font-weight:800; line-height:1;
+  }
+
+  .stat-label { color: rgba(255,255,255,0.45); font-size:0.8rem; margin-top:8px; letter-spacing:0.5px; }
+
+  /* ── SEÇÕES ── */
+  .section { padding: 90px 64px; }
+
+  .section-tag {
+    display:inline-block;
+    color: var(--green); font-size:0.72rem; font-weight:600;
+    letter-spacing:2px; text-transform:uppercase;
+    margin-bottom:12px;
+  }
+
+  .section-title {
+    font-family:'Playfair Display',serif;
+    font-size:clamp(2rem,3.5vw,2.8rem);
+    font-weight:800; line-height:1.15;
+    letter-spacing:-0.5px;
+  }
+
+  .section-sub {
+    color: var(--muted); font-size:1rem;
+    line-height:1.7; max-width:520px; margin-top:14px;
+  }
+
+  /* ── SERVIÇOS ── */
+  .services { background: var(--white); }
+
+  .services-header { text-align:center; margin-bottom:56px; }
+  .services-header .section-sub { margin:14px auto 0; }
+
+  .services-grid {
+    display:grid; grid-template-columns:repeat(3,1fr); gap:24px;
+  }
+
+  .serv-card {
+    background: var(--cream);
+    border: 1px solid var(--border);
+    border-radius:4px; padding:36px 30px;
+    transition: all 0.3s; position:relative; overflow:hidden;
+  }
+
+  .serv-card::before {
+    content:'';
+    position:absolute; bottom:0; left:0; right:0; height:3px;
+    background: linear-gradient(90deg, var(--green), var(--green-light));
+    transform:scaleX(0); transition: transform 0.3s;
+    transform-origin:left;
+  }
+
+  .serv-card:hover::before { transform:scaleX(1); }
+  .serv-card:hover { border-color: rgba(10,124,78,0.35); transform:translateY(-4px); box-shadow:0 16px 48px rgba(10,124,78,0.1); }
+
+  .serv-icon {
+    width:52px; height:52px;
+    background: var(--mint);
+    border-radius:4px;
+    display:flex; align-items:center; justify-content:center;
+    font-size:1.5rem; margin-bottom:20px;
+  }
+
+  .serv-card h3 { font-family:'Playfair Display',serif; font-size:1.25rem; margin-bottom:10px; }
+  .serv-card p { color: var(--muted); font-size:0.88rem; line-height:1.65; }
+
+  .serv-tag {
+    display:inline-block; margin-top:16px;
+    background: var(--mint); color: var(--green);
+    font-size:0.7rem; font-weight:600; letter-spacing:1px; text-transform:uppercase;
+    padding:5px 12px; border-radius:100px;
+  }
+
+  /* ── PLANOS ── */
+  .plans { background: var(--cream); }
+
+  .plans-header { text-align:center; margin-bottom:56px; }
+  .plans-header .section-sub { margin:14px auto 0; }
+
+  .plans-grid {
+    display:grid; grid-template-columns:repeat(3,1fr); gap:20px;
+    max-width:960px; margin:0 auto;
+  }
+
+  .plan-card {
+    background: var(--white);
+    border: 1.5px solid var(--border);
+    border-radius:4px; padding:36px 28px;
+    transition: all 0.3s; position:relative;
+  }
+
+  .plan-card.featured {
+    background: var(--dark);
+    border-color: var(--green);
+    transform:scale(1.03);
+  }
+
+  .plan-card.featured * { color: var(--white) !important; }
+  .plan-card.featured .plan-price { color: var(--green-light) !important; }
+  .plan-card.featured .plan-btn { background: var(--green-light); color: var(--dark) !important; }
+  .plan-card.featured .plan-check { color: var(--green-light) !important; }
+
+  .plan-badge {
+    position:absolute; top:-13px; left:50%; transform:translateX(-50%);
+    background: var(--green); color: var(--white);
+    font-size:0.68rem; font-weight:700; letter-spacing:1.5px; text-transform:uppercase;
+    padding:5px 16px; border-radius:100px; white-space:nowrap;
+  }
+
+  .plan-name { font-size:0.8rem; font-weight:600; letter-spacing:2px; text-transform:uppercase; color: var(--muted); margin-bottom:10px; }
+
+  .plan-price {
+    font-family:'Playfair Display',serif;
+    font-size:3rem; font-weight:800; color: var(--green); line-height:1;
+  }
+
+  .plan-price sup { font-size:1.2rem; vertical-align:super; }
+  .plan-price span { font-size:0.9rem; color: var(--muted); font-family:'DM Sans',sans-serif; font-weight:400; }
+
+  .plan-desc { color: var(--muted); font-size:0.82rem; margin:10px 0 20px; }
+
+  .plan-divider { border:none; border-top:1px solid var(--border); margin:20px 0; }
+
+  .plan-features { list-style:none; display:flex; flex-direction:column; gap:10px; margin-bottom:28px; }
+
+  .plan-features li { font-size:0.85rem; display:flex; align-items:center; gap:8px; }
+
+  .plan-check { color: var(--green); font-weight:700; }
+
+  .plan-btn {
+    width:100%; padding:13px;
+    background: var(--green); color: var(--white);
+    border:none; cursor:pointer; border-radius:2px;
+    font-family:'DM Sans',sans-serif; font-weight:600; font-size:0.9rem;
+    transition: all 0.3s;
+  }
+
+  .plan-btn:hover { opacity:0.85; transform:translateY(-1px); }
+
+  .plan-btn.outline {
+    background:transparent; color: var(--green);
+    border:1.5px solid var(--green);
+  }
+
+  .plan-btn.outline:hover { background: var(--mint); }
+
+  /* ── COMO FUNCIONA ── */
+  .how { background: var(--white); }
+
+  .how-grid {
+    display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:center;
+  }
+
+  .how-steps { display:flex; flex-direction:column; gap:0; }
+
+  .how-step {
+    display:flex; gap:20px; padding:24px 0;
+    border-bottom:1px solid var(--border);
+    cursor:default; transition: all 0.3s;
+  }
+
+  .how-step:last-child { border-bottom:none; }
+  .how-step:hover .step-num { background: var(--green); color: var(--white); }
+
+  .step-num {
+    width:44px; height:44px; flex-shrink:0;
+    border: 2px solid var(--green); color: var(--green);
+    font-family:'Playfair Display',serif; font-weight:800; font-size:1.1rem;
+    display:flex; align-items:center; justify-content:center;
+    border-radius:2px; transition: all 0.3s;
+  }
+
+  .step-content h4 { font-weight:600; font-size:1rem; margin-bottom:5px; }
+  .step-content p { color: var(--muted); font-size:0.85rem; line-height:1.6; }
+
+  .how-visual {
+    background: var(--mint);
+    border:1px solid var(--border);
+    border-radius:4px; padding:40px;
+    display:flex; flex-direction:column; gap:16px;
+  }
+
+  .vis-card {
+    background: var(--white);
+    border-radius:4px; padding:20px;
+    border:1px solid var(--border);
+    display:flex; align-items:center; gap:14px;
+    transition: transform 0.3s;
+  }
+
+  .vis-card:hover { transform:translateX(6px); }
+
+  .vis-icon {
+    width:42px; height:42px; flex-shrink:0;
+    background: var(--mint); border-radius:4px;
+    display:flex; align-items:center; justify-content:center; font-size:1.2rem;
+  }
+
+  .vis-title { font-weight:600; font-size:0.9rem; }
+  .vis-sub { color: var(--muted); font-size:0.75rem; margin-top:2px; }
+
+  .vis-badge {
+    margin-left:auto; background: var(--mint); color: var(--green);
+    font-size:0.68rem; font-weight:700; padding:4px 10px; border-radius:100px;
+    white-space:nowrap;
+  }
+
+  /* ── DEPOIMENTOS ── */
+  .testimonials { background: var(--cream); }
+
+  .test-header { text-align:center; margin-bottom:52px; }
+  .test-header .section-sub { margin:14px auto 0; }
+
+  .test-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+
+  .test-card {
+    background: var(--white);
+    border:1px solid var(--border);
+    border-radius:4px; padding:28px;
+    transition: all 0.3s;
+  }
+
+  .test-card:hover { border-color:var(--green-light); transform:translateY(-3px); box-shadow:0 12px 36px rgba(10,124,78,0.08); }
+
+  .test-stars { color: var(--green); font-size:0.9rem; margin-bottom:14px; letter-spacing:2px; }
+
+  .test-text { color: var(--text); font-size:0.88rem; line-height:1.7; margin-bottom:20px; font-style:italic; }
+
+  .test-author { display:flex; align-items:center; gap:12px; }
+
+  .test-avatar {
+    width:42px; height:42px; border-radius:50%;
+    background: var(--mint);
+    display:flex; align-items:center; justify-content:center;
+    font-size:1.1rem; font-weight:700; color: var(--green);
+    font-family:'Playfair Display',serif;
+  }
+
+  .test-name { font-weight:600; font-size:0.88rem; }
+  .test-role { color: var(--muted); font-size:0.75rem; }
+
+  /* ── FAQ ── */
+  .faq { background: var(--white); }
+
+  .faq-grid { display:grid; grid-template-columns:1fr 1fr; gap:60px; }
+
+  .faq-list { display:flex; flex-direction:column; gap:0; }
+
+  .faq-item { border-bottom:1px solid var(--border); }
+
+  .faq-q {
+    width:100%; background:none; border:none; cursor:pointer;
+    display:flex; align-items:center; justify-content:space-between;
+    padding: 20px 0; text-align:left;
+    font-family:'DM Sans',sans-serif; font-size:0.95rem; font-weight:500;
+    color: var(--text); transition: color 0.2s;
+  }
+
+  .faq-q:hover { color: var(--green); }
+
+  .faq-icon { font-size:1.2rem; color: var(--green); flex-shrink:0; transition: transform 0.3s; }
+  .faq-item.open .faq-icon { transform:rotate(45deg); }
+
+  .faq-a {
+    max-height:0; overflow:hidden;
+    transition: max-height 0.4s ease, padding 0.3s;
+    color: var(--muted); font-size:0.88rem; line-height:1.7;
+  }
+
+  .faq-item.open .faq-a { max-height:200px; padding-bottom:18px; }
+
+  .faq-cta {
+    background: var(--mint);
+    border:1px solid var(--border);
+    border-radius:4px; padding:40px;
+    display:flex; flex-direction:column; align-items:flex-start; gap:16px;
+    align-self:flex-start;
+  }
+
+  .faq-cta h3 { font-family:'Playfair Display',serif; font-size:1.5rem; }
+  .faq-cta p { color: var(--muted); font-size:0.88rem; line-height:1.6; }
+
+  /* ── CTA FINAL ── */
+  .final-cta {
+    background: var(--dark);
+    padding: 100px 64px;
+    text-align:center; position:relative; overflow:hidden;
+  }
+
+  .final-cta::before {
+    content:'';
+    position:absolute; inset:0;
+    background: radial-gradient(ellipse 60% 80% at 50% 50%, rgba(14,155,97,0.15) 0%, transparent 70%);
+  }
+
+  .final-cta h2 {
+    font-family:'Playfair Display',serif;
+    font-size:clamp(2.4rem,4.5vw,3.6rem);
+    color: var(--white); font-weight:800; line-height:1.1;
+    position:relative; z-index:2;
+  }
+
+  .final-cta h2 em { font-style:normal; color: var(--green-light); }
+
+  .final-cta p {
+    color:rgba(255,255,255,0.5); font-size:1rem;
+    max-width:480px; margin:20px auto 38px; line-height:1.7;
+    position:relative; z-index:2;
+  }
+
+  .final-cta-btns { display:flex; gap:14px; justify-content:center; flex-wrap:wrap; position:relative; z-index:2; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--dark2);
+    border-top:1px solid rgba(255,255,255,0.06);
+    padding:60px 64px;
+  }
+
+  .footer-grid { display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:40px; margin-bottom:48px; }
+
+  .footer-brand .logo { font-size:1.5rem; display:block; margin-bottom:14px; color: var(--green-light); }
+
+  .footer-brand p { color:rgba(255,255,255,0.4); font-size:0.83rem; line-height:1.7; max-width:230px; }
+
+  .footer-col h4 { font-size:0.7rem; letter-spacing:2px; text-transform:uppercase; color: var(--green-light); margin-bottom:16px; }
+
+  .footer-col ul { list-style:none; display:flex; flex-direction:column; gap:10px; }
+
+  .footer-col ul li a { color:rgba(255,255,255,0.4); text-decoration:none; font-size:0.84rem; transition:color 0.2s; }
+  .footer-col ul li a:hover { color: var(--white); }
+
+  .footer-bottom {
+    border-top:1px solid rgba(255,255,255,0.07); padding-top:24px;
+    display:flex; justify-content:space-between; align-items:center;
+  }
+
+  .footer-bottom p { color:rgba(255,255,255,0.3); font-size:0.78rem; }
+
+  .footer-crc {
+    color:rgba(255,255,255,0.3); font-size:0.75rem;
+    display:flex; align-items:center; gap:6px;
+  }
+
+  /* ── FORM MODAL ── */
+  .modal-overlay {
+    position:fixed; inset:0;
+    background:rgba(0,0,0,0.6); backdrop-filter:blur(6px);
+    z-index:2000; opacity:0; pointer-events:none;
+    transition:opacity 0.3s; display:flex; align-items:center; justify-content:center;
+  }
+
+  .modal-overlay.open { opacity:1; pointer-events:all; }
+
+  .modal {
+    background: var(--white); width:100%; max-width:480px;
+    border-radius:4px; padding:44px; position:relative;
+    transform:translateY(30px); transition:transform 0.4s cubic-bezier(0.4,0,0.2,1);
+  }
+
+  .modal-overlay.open .modal { transform:translateY(0); }
+
+  .modal-close {
+    position:absolute; top:16px; right:20px;
+    background:none; border:none; font-size:1.3rem; cursor:pointer; color: var(--muted);
+    transition:color 0.2s;
+  }
+
+  .modal-close:hover { color: var(--text); }
+
+  .modal h3 { font-family:'Playfair Display',serif; font-size:1.7rem; margin-bottom:6px; }
+  .modal p { color: var(--muted); font-size:0.85rem; margin-bottom:28px; }
+
+  .form-group { margin-bottom:16px; }
+
+  .form-group label { display:block; font-size:0.78rem; font-weight:600; letter-spacing:0.5px; margin-bottom:6px; color: var(--text); }
+
+  .form-group input, .form-group select {
+    width:100%; padding:12px 16px;
+    border:1.5px solid var(--border);
+    background: var(--cream); color: var(--text);
+    font-family:'DM Sans',sans-serif; font-size:0.9rem;
+    border-radius:2px; outline:none; transition:border-color 0.25s;
+  }
+
+  .form-group input:focus, .form-group select:focus { border-color: var(--green); }
+
+  .form-submit {
+    width:100%; padding:14px;
+    background: var(--green); color: var(--white);
+    border:none; cursor:pointer; border-radius:2px;
+    font-family:'DM Sans',sans-serif; font-weight:600; font-size:0.95rem;
+    margin-top:8px; transition:background 0.3s;
+  }
+
+  .form-submit:hover { background: var(--green-mid); }
+
+  /* ── TOAST ── */
+  .toast {
+    position:fixed; bottom:28px; right:28px;
+    background: var(--dark); color: var(--white);
+    border-left:4px solid var(--green-light);
+    padding:14px 22px; font-size:0.88rem;
+    z-index:3000; border-radius:2px;
+    transform:translateY(80px); opacity:0;
+    transition:all 0.4s cubic-bezier(0.4,0,0.2,1);
+    max-width:300px;
+  }
+
+  .toast.show { transform:translateY(0); opacity:1; }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity:0; transform:translateY(24px); }
+    to   { opacity:1; transform:translateY(0); }
+  }
+
+  @keyframes fadeLeft {
+    from { opacity:0; transform:translateX(40px); }
+    to   { opacity:1; transform:translateX(0); }
+  }
+
+  .reveal {
+    opacity:0; transform:translateY(28px);
+    transition:opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .reveal.visible { opacity:1; transform:translateY(0); }
+
+  /* ── RESPONSIVE ── */
+  @media(max-width:1100px){
+    .hero-right { display:none; }
+    .services-grid { grid-template-columns:repeat(2,1fr); }
+    .test-grid { grid-template-columns:repeat(2,1fr); }
+    .footer-grid { grid-template-columns:1fr 1fr; }
+  }
+
+  @media(max-width:768px){
+    nav { padding:16px 24px; }
+    nav ul { display:none; }
+    .hero { padding:100px 24px 60px; }
+    .section { padding:60px 24px; }
+    .stats { grid-template-columns:repeat(2,1fr); padding:40px 24px; }
+    .services-grid, .test-grid, .plans-grid, .how-grid, .faq-grid { grid-template-columns:1fr; }
+    .plan-card.featured { transform:scale(1); }
+    footer { padding:40px 24px; }
+    .footer-grid { grid-template-columns:1fr; }
+    .footer-bottom { flex-direction:column; gap:12px; }
+    .final-cta { padding:70px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <div class="logo">Amigos da <span>Contabilidade</span></div>
+  <ul>
+    <li><a href="#servicos">Serviços</a></li>
+    <li><a href="#planos">Planos</a></li>
+    <li><a href="#como-funciona">Como Funciona</a></li>
+    <li><a href="#depoimentos">Depoimentos</a></li>
+    <li><a href="#faq">FAQ</a></li>
+  </ul>
+  <a class="nav-cta" onclick="openModal()">Começar Grátis</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-dots"></div>
+  <div class="hero-left">
+    <div class="hero-tag">Contabilidade 100% Online</div>
+    <h1>Sua contabilidade<br><em>simples</em> e sem<br>burocracia</h1>
+    <p class="hero-sub">Feita para MEI e autônomos que querem focar no trabalho, não em papelada. Declarações, DAS, IRPF e muito mais — tudo online.</p>
+    <div class="hero-btns">
+      <a class="btn-green" onclick="openModal()">Quero Começar</a>
+      <a class="btn-ghost" href="#planos">Ver Planos</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-card-main">
+      <div class="hc-label">Resumo do mês</div>
+      <div class="hc-value">R$ 4.820</div>
+      <div class="hc-desc">Faturamento registrado — Junho/26</div>
+      <hr class="hc-divider">
+      <div class="hc-row"><span>DAS vencendo</span><strong>✅ Pago</strong></div>
+      <div class="hc-row"><span>IRPF 2026</span><strong>✅ Enviado</strong></div>
+      <div class="hc-row"><span>Limite MEI</span><strong>R$ 76k restante</strong></div>
+      <div class="hc-badge">🟢 Tudo em dia com o fisco</div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat-item">
+    <div class="stat-num">+8.000</div>
+    <div class="stat-label">clientes atendidos</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">4.9★</div>
+    <div class="stat-label">avaliação média</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">100%</div>
+    <div class="stat-label">online e sem filas</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">24h</div>
+    <div class="stat-label">suporte por WhatsApp</div>
+  </div>
+</div>
+
+<!-- SERVIÇOS -->
+<section class="section services reveal" id="servicos">
+  <div class="services-header">
+    <div class="section-tag">✦ O que oferecemos</div>
+    <h2 class="section-title">Tudo que o MEI e autônomo precisa</h2>
+    <p class="section-sub">Deixe a parte chata com a gente. Você só precisa focar no seu negócio.</p>
+  </div>
+  <div class="services-grid">
+    <div class="serv-card">
+      <div class="serv-icon">📄</div>
+      <h3>Emissão de DAS</h3>
+      <p>Boleto mensal do MEI gerado e enviado direto para você sem precisar acessar o gov.br.</p>
+      <span class="serv-tag">MEI</span>
+    </div>
+    <div class="serv-card">
+      <div class="serv-icon">📊</div>
+      <h3>Declaração Anual DASN</h3>
+      <p>A declaração obrigatória do MEI feita corretamente e enviada dentro do prazo todo ano.</p>
+      <span class="serv-tag">MEI</span>
+    </div>
+    <div class="serv-card">
+      <div class="serv-icon">💼</div>
+      <h3>Imposto de Renda (IRPF)</h3>
+      <p>Declaração completa do IRPF para autônomos, com restituição maximizada.</p>
+      <span class="serv-tag">Autônomo</span>
+    </div>
+    <div class="serv-card">
+      <div class="serv-icon">🧾</div>
+      <h3>Nota Fiscal Avulsa</h3>
+      <p>Orientação e emissão de notas fiscais avulsas para quem presta serviços sem CNPJ.</p>
+      <span class="serv-tag">Autônomo</span>
+    </div>
+    <div class="serv-card">
+      <div class="serv-icon">🔄</div>
+      <h3>Abertura e Baixa de MEI</h3>
+      <p>Abrimos ou encerramos seu MEI de forma rápida, sem burocracia e com orientação completa.</p>
+      <span class="serv-tag">MEI</span>
+    </div>
+    <div class="serv-card">
+      <div class="serv-icon">💬</div>
+      <h3>Consultoria Financeira</h3>
+      <p>Tire suas dúvidas com nossos contadores via WhatsApp. Sem enrolação, resposta rápida.</p>
+      <span class="serv-tag">Todos</span>
+    </div>
+  </div>
+</section>
+
+<!-- PLANOS -->
+<section class="section plans reveal" id="planos">
+  <div class="plans-header">
+    <div class="section-tag">✦ Preços</div>
+    <h2 class="section-title">Planos para cada momento</h2>
+    <p class="section-sub">Sem fidelidade, sem taxa de adesão. Cancele quando quiser.</p>
+  </div>
+  <div class="plans-grid">
+    <div class="plan-card">
+      <div class="plan-name">MEI Básico</div>
+      <div class="plan-price"><sup>R$</sup>49<span>/mês</span></div>
+      <div class="plan-desc">Para quem quer o essencial em dia.</div>
+      <hr class="plan-divider">
+      <ul class="plan-features">
+        <li><span class="plan-check">✓</span> Emissão do DAS mensal</li>
+        <li><span class="plan-check">✓</span> DASN anual incluída</li>
+        <li><span class="plan-check">✓</span> Suporte por e-mail</li>
+        <li><span class="plan-check">✓</span> Portal do cliente online</li>
+        <li style="color:var(--muted)">✗ IRPF</li>
+        <li style="color:var(--muted)">✗ Consultoria por WhatsApp</li>
+      </ul>
+      <button class="plan-btn outline" onclick="openModal()">Começar Agora</button>
+    </div>
+
+    <div class="plan-card featured">
+      <div class="plan-badge">Mais Popular</div>
+      <div class="plan-name">MEI + Autônomo</div>
+      <div class="plan-price"><sup>R$</sup>99<span>/mês</span></div>
+      <div class="plan-desc">Para quem quer tranquilidade total.</div>
+      <hr class="plan-divider" style="border-color:rgba(255,255,255,0.12)">
+      <ul class="plan-features">
+        <li><span class="plan-check">✓</span> Tudo do plano básico</li>
+        <li><span class="plan-check">✓</span> Declaração IRPF</li>
+        <li><span class="plan-check">✓</span> Nota fiscal avulsa</li>
+        <li><span class="plan-check">✓</span> WhatsApp com contador</li>
+        <li><span class="plan-check">✓</span> Relatório mensal</li>
+        <li><span class="plan-check">✓</span> Prioridade no atendimento</li>
+      </ul>
+      <button class="plan-btn" onclick="openModal()">Escolher Plano</button>
+    </div>
+
+    <div class="plan-card">
+      <div class="plan-name">Autônomo Plus</div>
+      <div class="plan-price"><sup>R$</sup>149<span>/mês</span></div>
+      <div class="plan-desc">Para quem tem renda variada e complexa.</div>
+      <hr class="plan-divider">
+      <ul class="plan-features">
+        <li><span class="plan-check">✓</span> Tudo do plano anterior</li>
+        <li><span class="plan-check">✓</span> Múltiplas fontes de renda</li>
+        <li><span class="plan-check">✓</span> Consultoria dedicada</li>
+        <li><span class="plan-check">✓</span> Planejamento tributário</li>
+        <li><span class="plan-check">✓</span> Revisão de contratos</li>
+        <li><span class="plan-check">✓</span> Contador exclusivo</li>
+      </ul>
+      <button class="plan-btn outline" onclick="openModal()">Começar Agora</button>
+    </div>
+  </div>
+</section>
+
+<!-- COMO FUNCIONA -->
+<section class="section how reveal" id="como-funciona">
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center">
+    <div>
+      <div class="section-tag">✦ Processo</div>
+      <h2 class="section-title">Simples do<br>início ao fim</h2>
+      <p class="section-sub">Em menos de 5 minutos você já tem um contador cuidando de tudo por você.</p>
+      <br><br>
+      <div class="how-steps">
+        <div class="how-step">
+          <div class="step-num">01</div>
+          <div class="step-content">
+            <h4>Faça seu cadastro</h4>
+            <p>Preencha seus dados básicos em menos de 2 minutos. Sem papel, sem complicação.</p>
+          </div>
+        </div>
+        <div class="how-step">
+          <div class="step-num">02</div>
+          <div class="step-content">
+            <h4>Escolha seu plano</h4>
+            <p>Selecione o plano ideal para seu momento. Cancele quando quiser.</p>
+          </div>
+        </div>
+        <div class="how-step">
+          <div class="step-num">03</div>
+          <div class="step-content">
+            <h4>Fale com seu contador</h4>
+            <p>Seu contador entra em contato em até 1 hora e assume tudo para você.</p>
+          </div>
+        </div>
+        <div class="how-step">
+          <div class="step-num">04</div>
+          <div class="step-content">
+            <h4>Relaxe e trabalhe</h4>
+            <p>Acompanhe tudo pelo portal e receba alertas. Nada vai atrasar ou ser esquecido.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="how-visual">
+      <div style="font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;margin-bottom:8px;color:var(--green)">📋 Seu painel Amigos da Contabilidade</div>
+      <div class="vis-card">
+        <div class="vis-icon">📅</div>
+        <div><div class="vis-title">DAS Junho/26</div><div class="vis-sub">Vence em 20/06/2026</div></div>
+        <div class="vis-badge">✅ Pago</div>
+      </div>
+      <div class="vis-card">
+        <div class="vis-icon">📊</div>
+        <div><div class="vis-title">DASN 2025</div><div class="vis-sub">Prazo: 31/05/2026</div></div>
+        <div class="vis-badge">✅ Enviado</div>
+      </div>
+      <div class="vis-card">
+        <div class="vis-icon">💼</div>
+        <div><div class="vis-title">IRPF 2026</div><div class="vis-sub">Em processamento</div></div>
+        <div class="vis-badge" style="background:#FFF3CD;color:#856404">⏳ Pendente</div>
+      </div>
+      <div class="vis-card">
+        <div class="vis-icon">💬</div>
+        <div><div class="vis-title">Contador Online</div><div class="vis-sub">Disponível agora</div></div>
+        <div class="vis-badge">🟢 Online</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DEPOIMENTOS -->
+<section class="section testimonials reveal" id="depoimentos">
+  <div class="test-header">
+    <div class="section-tag">✦ Depoimentos</div>
+    <h2 class="section-title">Quem usa, aprova</h2>
+    <p class="section-sub">Mais de 8.000 MEIs e autônomos já confiam na Amigos da Contabilidade.</p>
+  </div>
+  <div class="test-grid">
+    <div class="test-card">
+      <div class="test-stars">★★★★★</div>
+      <p class="test-text">"Finalmente uma contabilidade que fala minha língua. Meu DAS sempre em dia e nunca mais me preocupei com prazo."</p>
+      <div class="test-author">
+        <div class="test-avatar">A</div>
+        <div><div class="test-name">Ana Paula</div><div class="test-role">Fotógrafa Autônoma, RJ</div></div>
+      </div>
+    </div>
+    <div class="test-card">
+      <div class="test-stars">★★★★★</div>
+      <p class="test-text">"Economizei mais de R$2.000 na restituição do IR com a ajuda do contador da Amigos da Contabilidade. Super recomendo!"</p>
+      <div class="test-author">
+        <div class="test-avatar">M</div>
+        <div><div class="test-name">Marcos Oliveira</div><div class="test-role">Pedreiro MEI, SP</div></div>
+      </div>
+    </div>
+    <div class="test-card">
+      <div class="test-stars">★★★★★</div>
+      <p class="test-text">"Fui no WhatsApp, em 5 minutos já tinha resposta. Isso é o que chamo de serviço de verdade."</p>
+      <div class="test-author">
+        <div class="test-avatar">J</div>
+        <div><div class="test-name">Juliana Costa</div><div class="test-role">Designer Freelancer, MG</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section faq reveal" id="faq">
+  <div class="faq-grid">
+    <div>
+      <div class="section-tag">✦ Dúvidas</div>
+      <h2 class="section-title" style="margin-bottom:36px">Perguntas<br>frequentes</h2>
+      <div class="faq-list">
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            Preciso sair de casa para contratar? <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-a">Não! Tudo é feito 100% online. Cadastro, assinatura e atendimento são feitos pelo site ou WhatsApp.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            Tenho contrato de fidelidade? <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-a">Não. Você pode cancelar quando quiser, sem multas ou burocracia. Acreditamos no serviço, não na prisão.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            Em quanto tempo recebo atendimento? <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-a">Após o cadastro, um contador entra em contato em até 1 hora útil. Suporte geral é respondido em até 4h.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            O plano inclui abertura de MEI? <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-a">A abertura de MEI é um serviço avulso disponível para quem ainda não tem CNPJ. Consulte valores.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            Vocês atendem qualquer estado do Brasil? <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-a">Sim! Atendemos todo o Brasil, pois somos 100% digitais. Não importa sua cidade.</div>
+        </div>
+      </div>
+    </div>
+    <div class="faq-cta">
+      <div style="font-size:2.5rem">🤝</div>
+      <h3>Ainda tem dúvidas?</h3>
+      <p>Fale com um especialista agora mesmo. Sem compromisso, sem pressão.</p>
+      <a class="btn-green" onclick="openModal()">Falar com Especialista</a>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final-cta">
+  <h2>Sua contabilidade<br><em>começa hoje</em></h2>
+  <p>Junte-se a milhares de MEIs e autônomos que já deixaram a burocracia para trás.</p>
+  <div class="final-cta-btns">
+    <a class="btn-green" onclick="openModal()">Começar Grátis por 7 Dias</a>
+    <a class="btn-ghost" style="border-color:rgba(255,255,255,0.3);color:#fff" href="#planos">Ver Planos</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="logo">Amigos da Contabilidade</span>
+      <p>Contabilidade online para MEI e autônomos em todo o Brasil. Simples, rápida e sem burocracia.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Serviços</h4>
+      <ul>
+        <li><a href="#">Emissão de DAS</a></li>
+        <li><a href="#">DASN Anual</a></li>
+        <li><a href="#">IRPF</a></li>
+        <li><a href="#">Abertura de MEI</a></li>
+        <li><a href="#">Nota Fiscal</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Empresa</h4>
+      <ul>
+        <li><a href="#">Sobre nós</a></li>
+        <li><a href="#">Como funciona</a></li>
+        <li><a href="#">Depoimentos</a></li>
+        <li><a href="#">Blog</a></li>
+        <li><a href="#">Trabalhe conosco</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contato</h4>
+      <ul>
+        <li><a href="#">📱 WhatsApp</a></li>
+        <li><a href="#">📧 contato@amigoscontabilidade.com.br</a></li>
+        <li><a href="#">📸 Instagram</a></li>
+        <li><a href="#">Política de Privacidade</a></li>
+        <li><a href="#">Termos de Uso</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Amigos da Contabilidade Serviços de Contabilidade Online. CNPJ 00.000.000/0001-00</p>
+    <div class="footer-crc">🔒 Dados protegidos · CRC/SP 00000</div>
+  </div>
+</footer>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modal" onclick="closeModalOutside(event)">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <h3>Começar é grátis</h3>
+    <p>7 dias grátis, sem cartão de crédito. Preencha e um contador entra em contato em até 1h.</p>
+    <div class="form-group">
+      <label>Nome completo</label>
+      <input type="text" placeholder="Seu nome">
+    </div>
+    <div class="form-group">
+      <label>WhatsApp</label>
+      <input type="tel" placeholder="(21) 99999-9999">
+    </div>
+    <div class="form-group">
+      <label>E-mail</label>
+      <input type="email" placeholder="seu@email.com">
+    </div>
+    <div class="form-group">
+      <label>Você é:</label>
+      <select>
+        <option>MEI</option>
+        <option>Autônomo sem CNPJ</option>
+        <option>Quero abrir MEI</option>
+      </select>
+    </div>
+    <button class="form-submit" onclick="submitForm()">Quero meu período grátis →</button>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+  // MODAL
+  function openModal() {
+    document.getElementById('modal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal() {
+    document.getElementById('modal').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  function closeModalOutside(e) {
+    if (e.target === document.getElementById('modal')) closeModal();
+  }
+
+  // FORM
+  function submitForm() {
+    closeModal();
+    showToast('✅ Cadastro realizado! Um contador entrará em contato em breve.');
+  }
+
+  // TOAST
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.innerHTML = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 4000);
+  }
+
+  // FAQ
+  function toggleFaq(btn) {
+    const item = btn.parentElement;
+    item.classList.toggle('open');
+  }
+
+  // SCROLL REVEAL
+  const reveals = document.querySelectorAll('.reveal');
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08 });
+  reveals.forEach(r => obs.observe(r));
+</script>
+</body>
+</html>
